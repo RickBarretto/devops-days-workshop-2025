@@ -34,6 +34,8 @@ services:
       - AWS_ENDPOINT_URL=http://localstack:4566
     command: ["tail -f /dev/null"]
     restart: unless-stopped
+    volumes:
+      - "./:/tmp/localstack:ro"
 
 volumes:
   localstack-data:
