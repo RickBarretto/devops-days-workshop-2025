@@ -26,12 +26,13 @@ services:
     image: amazon/aws-cli
     depends_on:
       - localstack
+    entrypoint: ["bash", "-c"]
     environment:
       - AWS_ACCESS_KEY_ID=test
       - AWS_SECRET_ACCESS_KEY=test
       - AWS_DEFAULT_REGION=us-east-1
       - AWS_ENDPOINT_URL=http://localstack:4566
-    command: ["sleep", "infinity"]
+    command: ["tail -f /dev/null"]
     restart: unless-stopped
 
 volumes:
