@@ -16,7 +16,7 @@ jobs:
       - name: Setup Docker
         uses: docker/setup-docker-action@v4
 
-      - name: Docker login
+      - name: Login Docker
         uses: docker/login-action@v1
         with: 
           registry: ${{ github.repository_name }}
