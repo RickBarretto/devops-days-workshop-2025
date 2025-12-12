@@ -1,0 +1,38 @@
+services:
+  nginx:
+    image: nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./html:/usr/share/nginx/html:ro
+    restart: unless-stopped
+
+  localstack:
+    image: localstack/localstack
+    environment:
+      - SERVICES=s3,sqs,lambda
+      - DEFAULT_REGION=us-east-1
+      - EDGE_PORT=4566
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+    ports:
+      - "4566:4566"
+    volumes:
+      - localstack-data:/var/lib/localstack
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    restart: unless-stopped
+
+  aws-cli:
+    image: amazon/aws-cli
+    depends_on:
+      - localstack
+    environment:
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+      - AWS_DEFAULT_REGION=us-east-1
+      - AWS_ENDPOINT_URL=http://localstack:4566
+    command: ["sleep", "infinity"]
+    restart: unless-stopped
+
+volumes:
+  localstack-data:
