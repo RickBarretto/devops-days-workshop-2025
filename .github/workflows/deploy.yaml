@@ -16,7 +16,7 @@ jobs:
       - name: Docker login
         uses: docker/login-action@v1
         with: 
-          registry: ${{ github.repository }}
+          registry: ${{ github.repository_name }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
@@ -26,7 +26,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ github.repository }}:latest
+          tags: ${{ github.repository_name }}:latest
 
 
   publish:
