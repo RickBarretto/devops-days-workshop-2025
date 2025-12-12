@@ -19,7 +19,6 @@ services:
     volumes:
       - localstack-data:/var/lib/localstack
       - "/var/run/docker.sock:/var/run/docker.sock"
-      - "./:/tmp/localstack:ro"
     restart: unless-stopped
 
   aws-cli:
