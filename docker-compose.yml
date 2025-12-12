@@ -10,7 +10,6 @@ services:
   localstack:
     image: localstack/localstack
     environment:
-      - SERVICES=s3,sqs,lambda
       - DEFAULT_REGION=us-east-1
       - EDGE_PORT=4566
       - AWS_ACCESS_KEY_ID=test
